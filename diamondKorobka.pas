@@ -1,0 +1,45 @@
+procedure PrintSpaces(count: integer);
+var
+    i: integer;
+begin
+    for i := 1 to count do
+        write(' ')
+end;
+
+procedure PrintStars(count: integer);
+var
+    i: integer;
+begin
+    for i := 1 to count do
+        write('*')
+end;
+procedure PrintLineOfDiamond(k, n: integer);
+var
+    sideStars, innerSpaces: integer;
+begin
+    sideStars := n + 1 - k;
+    PrintStars(sideStars);
+    write('*');
+    if k > 1 then
+    begin
+        innerSpaces := 2 * k - 3;
+        PrintSpaces(innerSpaces);
+        write('*');
+    end;
+    PrintStars(sideStars);
+    writeln
+end;
+
+var
+    n, k, h: integer;
+begin
+    repeat
+        write('Enter height of diamond: ');
+        readln(h)
+    until (h > 0) and (h mod 2 = 1);
+    n := h div 2;
+    for k := 1 to n + 1 do
+        PrintLineOfDiamond(k, n);
+    for k := n downto 1 do
+        PrintLineOfDiamond(k, n)
+end.
