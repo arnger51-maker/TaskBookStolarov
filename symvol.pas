@@ -1,25 +1,26 @@
 procedure VerifyString(var char: string);
 var
-    Verify: boolean;
     i, j, l, count: integer;
-    Vstring, c: string;
-    index: array[1..255] of integer;
+    Vstring: string;
+    counts: array[1..255] of integer;
+    c: char;
 
 begin
     Vstring := '';
-    count := length(char);
-    Verify := false;
-    for i := 1 to count do
-    begin 
-        char := LowerCase(char);
-        c := char[i];
+    for j := 1 to 256 do
+        counts[j] := 0;
 
-        if (c >= 'a') and (c <= 'z') then
-        begin
-            if (index[i] > 1) then
-                Vstring := Vstring + c;
-            index[i] := index[i] + 1;
-        end;
+    for i := 1 to Length(char) do
+    begin 
+        c := char[i];
+        if c = ' ' then
+            continue;
+
+        counts[Ord(c)] := counts[Ord(c)] + 1;
+
+        if counts[Ord(c)] = 2 then
+            Vstring := Vstring + c;
+
     end;
     writeln(Vstring);
 end;
